@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Nav from './Nav';
 
 function TextForm(props) {
     const [text, setText] = useState('');
@@ -7,11 +8,13 @@ function TextForm(props) {
         console.log("button Clicked");
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert("Converted to Upper Case", "success")
     }
 
     const handleLowerClick =()=> {
         let lowerText = text.toLowerCase();
         setText(lowerText);
+        props.showAlert("Converted to Lower Case", "success")
     }
     const handleOnChange = (event)=> {
         console.log("button Clicked")
@@ -22,6 +25,7 @@ function TextForm(props) {
     }
     const handleCopyClick = ()=> {
         navigator.clipboard.writeText(text);
+        props.showAlert("Copy Text", "success");
     }
     const handleRemoveSpace =()=>{
         let newText = text.split(/[ ]+/);
@@ -29,6 +33,7 @@ function TextForm(props) {
     }
   return (
    <>
+   <Nav />
     <div className='container'   style= {{color: props.mode === 'dark' ? 'white' : 'black'}}
 >
     <h2>{props.heading} </h2>
